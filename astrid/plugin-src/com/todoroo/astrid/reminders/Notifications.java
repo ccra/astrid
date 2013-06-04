@@ -2,6 +2,8 @@
  * Copyright (c) 2012 Todoroo Inc
  *
  * See the file "LICENSE" for the full license governing this code.
+ *
+ * Edited by christi
  */
 package com.todoroo.astrid.reminders;
 
@@ -54,7 +56,7 @@ public class Notifications extends BroadcastReceiver {
 
     /** task id extra */
     public static final String ID_KEY = "id"; //$NON-NLS-1$
-
+    private static String task_title;
 
     /** preference values */
     public static final int ICON_SET_PINK = 0;
@@ -186,6 +188,10 @@ public class Notifications extends BroadcastReceiver {
         boolean nonstopMode = task.getFlag(Task.REMINDER_FLAGS, Task.NOTIFY_MODE_NONSTOP);
         boolean ringFiveMode = task.getFlag(Task.REMINDER_FLAGS, Task.NOTIFY_MODE_FIVE);
         int ringTimes = nonstopMode ? -1 : (ringFiveMode ? 5 : 1);
+
+        //get info for popup reminder
+        task_title=taskTitle;
+        task.getValue(Task.DUE_DATE).toString();
 
         // update last reminder time
         task.setValue(Task.REMINDER_LAST, DateUtilities.now());
@@ -428,7 +434,12 @@ public class Notifications extends BroadcastReceiver {
 
         @Override
         public void run() {
+            Context context=ContextManager.getContext();
             for(int i = 0; i < Math.max(ringTimes, 1); i++) {
+                Task task;
+                Intent reminderPopupIntent = new Intent(context, ReminderPopupActivity.class);
+                reminderPopupIntent.putExtra(EXTRAS_TITLE, task_title);
+                context.startActivity(reminderPopupIntent);
                 notificationManager.notify(notificationId, notification);
                 AndroidUtilities.sleepDeep(500);
             }

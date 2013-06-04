@@ -530,6 +530,15 @@
       <item>You can always send a text...</item>
   </string-array>
   
+  <!-- Reminder Popup close -->
+  <string name="RPA_close">Close</string>
+  
+  <!-- Reminder Popup goto -->
+  <string name="RPA_goto_task">Go to Task</string>
+  
+   <!-- Reminder Popup Title -->
+   <string name="RPA_title">Task : %s</string>
+  
   
   <!-- ======================================= Calendar reminder activity == -->
   

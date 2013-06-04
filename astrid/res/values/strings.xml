@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="title_activity_reminder_popup">Astrid Reminder</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>
